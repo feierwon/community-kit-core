@@ -1,0 +1,16 @@
+{
+	"name": "community-kit",
+	"version": "0.1.0",
+	"description": "A modular WordPress framework for nonprofits and community organizations.",
+	"author": "Feierwon Media",
+	"license": "GPL-2.0-or-later",
+	"scripts": {
+		"build": "wp-scripts build",
+		"start": "wp-scripts start",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js"
+	},
+	"devDependencies": {
+		"@wordpress/scripts": "^27.0.0"
+	}
+}
