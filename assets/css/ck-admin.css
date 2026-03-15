@@ -4,6 +4,20 @@
  * @package CommunityKit
  */
 
+/* -----------------------------------------------
+   Layout & Sections
+   ----------------------------------------------- */
+
+.ck-section {
+	margin-top: 24px;
+	padding-bottom: 8px;
+}
+
+.ck-section + .ck-section {
+	border-top: 1px solid #e0e0e0;
+	padding-top: 16px;
+}
+
 /* Welcome panel */
 .ck-welcome-panel {
 	background: #fff;
@@ -13,14 +27,33 @@
 	margin: 16px 0;
 }
 
-/* Status badges */
+/* Group headings */
+.ck-group-heading {
+	font-size: 14px;
+	font-weight: 600;
+	margin: 16px 0 4px;
+	color: #1d2327;
+}
+
+/* Empty state */
+.ck-empty-state {
+	color: #646970;
+	font-style: italic;
+}
+
+/* -----------------------------------------------
+   Status Badges
+   ----------------------------------------------- */
+
 .ck-status {
 	display: inline-block;
-	padding: 2px 8px;
+	padding: 2px 10px;
 	border-radius: 3px;
 	font-size: 12px;
 	font-weight: 600;
 	line-height: 1.5;
+	text-transform: uppercase;
+	letter-spacing: 0.3px;
 }
 
 .ck-status--active,
@@ -40,8 +73,51 @@
 	color: #8a6d3b;
 }
 
-/* Dashboard & Scanner layout */
-.ck-dashboard .widefat,
-.ck-scanner .widefat {
-	margin-top: 16px;
+/* -----------------------------------------------
+   Tables
+   ----------------------------------------------- */
+
+.ck-status-table,
+.ck-modules-table {
+	margin-top: 8px;
+	margin-bottom: 16px;
+}
+
+.ck-status-table th,
+.ck-modules-table th {
+	font-weight: 600;
+}
+
+.ck-modules-table code {
+	font-size: 12px;
+	background: #f0f0f1;
+	padding: 2px 6px;
+	border-radius: 3px;
+}
+
+/* -----------------------------------------------
+   License Section
+   ----------------------------------------------- */
+
+.ck-license-section {
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	padding: 16px 24px 8px;
+	margin-top: 24px;
+}
+
+.ck-license-section h2 {
+	margin-top: 0;
+}
+
+.ck-license-section .form-table th {
+	padding-left: 0;
+}
+
+/* -----------------------------------------------
+   Scanner Page
+   ----------------------------------------------- */
+
+.ck-scanner .button-primary {
+	margin-bottom: 8px;
 }

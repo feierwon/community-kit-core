@@ -109,11 +109,12 @@ add_action( 'plugins_loaded', 'community_kit_init' );
  * @param array $args {
  *     Module arguments.
  *
- *     @type string $id          Unique module identifier.
- *     @type string $label       Human-readable label.
- *     @type string $description Short description of the module.
- *     @type string $version     Module version string.
- *     @type string $file        Absolute path to the module bootstrap file.
+ *     @type string $id          Required. Unique module identifier.
+ *     @type string $name        Required. Human-readable name.
+ *     @type string $version     Required. Module version string.
+ *     @type string $min_core    Required. Minimum Community Kit Core version.
+ *     @type string $description Required. Short description of the module.
+ *     @type string $file        Optional. Absolute path to the module bootstrap file.
  * }
  * @return bool True on success, false on failure.
  */
@@ -129,6 +130,24 @@ function community_kit_register_module( array $args ): bool {
  */
 function community_kit_is_module_active( string $module_id ): bool {
 	return CK_Registry::get_instance()->is_module_active( $module_id );
+}
+
+/**
+ * Register a compatibility check for the scanner.
+ *
+ * @param array $args {
+ *     Check arguments.
+ *
+ *     @type string   $id        Required. Unique check identifier.
+ *     @type string   $label     Required. Human-readable check name.
+ *     @type callable $callback  Required. Function returning an array with keys:
+ *                               id, label, status (pass/warn/fail), message.
+ *     @type string   $module_id Required. The module registering this check.
+ * }
+ * @return bool True on success, false on failure.
+ */
+function community_kit_register_compatibility_check( array $args ): bool {
+	return CK_Registry::get_instance()->register_compatibility_check( $args );
 }
 
 /**
