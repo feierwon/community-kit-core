@@ -35,6 +35,19 @@ class CK_Registry {
 	private array $modules = array();
 
 	/**
+	 * Registered wizards keyed by module ID.
+	 *
+	 * Each entry contains:
+	 *   - module     (string)   The module registering this wizard.
+	 *   - steps      (array)    Ordered list of step identifiers.
+	 *   - option_key (string)   wp_options key tracking wizard completion.
+	 *   - script     (string)   Handle of the enqueued wizard JS bundle.
+	 *
+	 * @var array<string, array>
+	 */
+	private array $wizards = array();
+
+	/**
 	 * Registered compatibility checks keyed by check ID.
 	 *
 	 * Each entry contains:
@@ -209,6 +222,70 @@ class CK_Registry {
 		);
 
 		return true;
+	}
+
+	/**
+	 * Register a module wizard.
+	 *
+	 * @param array $args {
+	 *     Wizard arguments.
+	 *
+	 *     @type string   $module     Required. Module ID that owns this wizard.
+	 *     @type string[] $steps      Required. Ordered list of step identifiers.
+	 *     @type string   $option_key Required. wp_options key for completion tracking.
+	 *     @type string   $script     Optional. Script handle for the wizard JS bundle.
+	 * }
+	 * @return bool True on success, false on failure.
+	 */
+	public function register_wizard( array $args ): bool {
+		$required_keys = array( 'module', 'steps', 'option_key' );
+
+		foreach ( $required_keys as $key ) {
+			if ( empty( $args[ $key ] ) ) {
+				community_kit_log(
+					sprintf( 'Wizard registration failed: missing required field "%s".', $key ),
+					'warning'
+				);
+				return false;
+			}
+		}
+
+		$module_id = sanitize_key( $args['module'] );
+
+		if ( isset( $this->wizards[ $module_id ] ) ) {
+			community_kit_log( "Wizard for module '{$module_id}' is already registered.", 'warning' );
+			return false;
+		}
+
+		$this->wizards[ $module_id ] = array(
+			'module'     => $module_id,
+			'steps'      => array_map( 'sanitize_key', $args['steps'] ),
+			'option_key' => sanitize_key( $args['option_key'] ),
+			'script'     => isset( $args['script'] ) ? sanitize_key( $args['script'] ) : '',
+		);
+
+		community_kit_log( "Wizard for module '{$module_id}' registered." );
+		return true;
+	}
+
+	/**
+	 * Get all registered wizards.
+	 *
+	 * @return array<string, array>
+	 */
+	public function get_wizards(): array {
+		return $this->wizards;
+	}
+
+	/**
+	 * Get a specific wizard by module ID.
+	 *
+	 * @param string $module_id The module identifier.
+	 * @return array|null Wizard data or null if not found.
+	 */
+	public function get_wizard( string $module_id ): ?array {
+		$module_id = sanitize_key( $module_id );
+		return $this->wizards[ $module_id ] ?? null;
 	}
 
 	/**

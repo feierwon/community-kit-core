@@ -2,8 +2,8 @@
 vendor/
 node_modules/
 
-# Build artifacts
-build/
+# Build artifacts are committed for distribution
+# build/
 
 # Logs
 *.log

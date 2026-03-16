@@ -65,6 +65,7 @@ class CK_Core {
 		// Boot the admin interface.
 		if ( is_admin() ) {
 			CK_Admin::get_instance()->init();
+			CK_Wizard::get_instance()->init();
 		}
 
 		/**

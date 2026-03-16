@@ -51,6 +51,7 @@ require_once CK_DIR . 'includes/class-ck-registry.php';
 require_once CK_DIR . 'includes/class-ck-scanner.php';
 require_once CK_DIR . 'includes/class-ck-license.php';
 require_once CK_DIR . 'includes/class-ck-updater.php';
+require_once CK_DIR . 'includes/class-ck-wizard.php';
 require_once CK_DIR . 'admin/class-ck-admin.php';
 
 /*
@@ -148,6 +149,36 @@ function community_kit_is_module_active( string $module_id ): bool {
  */
 function community_kit_register_compatibility_check( array $args ): bool {
 	return CK_Registry::get_instance()->register_compatibility_check( $args );
+}
+
+/**
+ * Register a wizard for a module.
+ *
+ * @param array $args {
+ *     Wizard arguments.
+ *
+ *     @type string   $module     Required. Module ID that owns this wizard.
+ *     @type string[] $steps      Required. Ordered list of step identifiers.
+ *     @type string   $option_key Required. wp_options key for completion tracking.
+ *     @type string   $script     Optional. Script handle for the wizard JS bundle.
+ * }
+ * @return bool True on success, false on failure.
+ */
+function community_kit_register_wizard( array $args ): bool {
+	return CK_Registry::get_instance()->register_wizard( $args );
+}
+
+/**
+ * Build a redirect URL for external help links.
+ *
+ * Routes through getliftoff.org/go/ so that if third-party URLs change,
+ * only the redirect on the site needs updating — no plugin release required.
+ *
+ * @param string $slug The link slug (e.g. 'mailchimp-api-key').
+ * @return string Full URL, e.g. https://getliftoff.org/go/mailchimp-api-key
+ */
+function community_kit_help_url( string $slug ): string {
+	return 'https://getliftoff.org/go/' . sanitize_key( $slug );
 }
 
 /**

@@ -121,7 +121,7 @@ class CK_Scanner {
 				'label'   => __( 'PHP Version', 'community-kit' ),
 				'status'  => 'pass',
 				/* translators: %s: current PHP version */
-				'message' => sprintf( __( 'PHP %s detected.', 'community-kit' ), PHP_VERSION ),
+				'message' => sprintf( __( 'Your server is running PHP %s, a current version of the software that powers your website. You\'re all set.', 'community-kit' ), PHP_VERSION ),
 			);
 		}
 
@@ -130,7 +130,7 @@ class CK_Scanner {
 			'label'   => __( 'PHP Version', 'community-kit' ),
 			'status'  => 'fail',
 			/* translators: 1: required PHP version, 2: current PHP version */
-			'message' => sprintf( __( 'PHP %1$s or higher is required. You are running %2$s.', 'community-kit' ), $required, PHP_VERSION ),
+			'message' => sprintf( __( 'Your server is running an older version of PHP (%2$s) that may cause problems. Contact your hosting provider and ask them to upgrade PHP to version %1$s or higher — it\'s a routine request.', 'community-kit' ), $required, PHP_VERSION ),
 		);
 	}
 
@@ -148,7 +148,7 @@ class CK_Scanner {
 				'label'   => __( 'WordPress Version', 'community-kit' ),
 				'status'  => 'pass',
 				/* translators: %s: current WordPress version */
-				'message' => sprintf( __( 'WordPress %s detected.', 'community-kit' ), get_bloginfo( 'version' ) ),
+				'message' => sprintf( __( 'Your site is running WordPress %s, which meets the requirements. You\'re all set.', 'community-kit' ), get_bloginfo( 'version' ) ),
 			);
 		}
 
@@ -157,7 +157,7 @@ class CK_Scanner {
 			'label'   => __( 'WordPress Version', 'community-kit' ),
 			'status'  => 'fail',
 			/* translators: 1: required WP version, 2: current WP version */
-			'message' => sprintf( __( 'WordPress %1$s or higher is required. You are running %2$s.', 'community-kit' ), $required, get_bloginfo( 'version' ) ),
+			'message' => sprintf( __( 'Your site is running an older version of WordPress (%2$s) that isn\'t supported. Go to Dashboard > Updates to upgrade to version %1$s or higher, or ask your site administrator to do it for you.', 'community-kit' ), $required, get_bloginfo( 'version' ) ),
 		);
 	}
 
@@ -189,7 +189,7 @@ class CK_Scanner {
 					'label'   => __( 'Database Version', 'community-kit' ),
 					'status'  => 'pass',
 					/* translators: %s: MariaDB version */
-					'message' => sprintf( __( 'MariaDB %s detected.', 'community-kit' ), $mariadb_version ),
+					'message' => sprintf( __( 'Your database (MariaDB %s), which stores all of your site\'s content, is running a supported version. You\'re all set.', 'community-kit' ), $mariadb_version ),
 				);
 			}
 
@@ -198,7 +198,7 @@ class CK_Scanner {
 				'label'   => __( 'Database Version', 'community-kit' ),
 				'status'  => 'warn',
 				/* translators: %s: MariaDB version */
-				'message' => sprintf( __( 'MariaDB 10.3 or higher is recommended. You are running %s.', 'community-kit' ), $mariadb_version ),
+				'message' => sprintf( __( 'Your database software (MariaDB %s) is outdated. The database is where all of your site\'s content is stored. Contact your hosting provider and ask them to upgrade MariaDB to version 10.3 or higher.', 'community-kit' ), $mariadb_version ),
 			);
 		}
 
@@ -209,7 +209,7 @@ class CK_Scanner {
 				'label'   => __( 'Database Version', 'community-kit' ),
 				'status'  => 'pass',
 				/* translators: %s: MySQL version */
-				'message' => sprintf( __( 'MySQL %s detected.', 'community-kit' ), $db_version ),
+				'message' => sprintf( __( 'Your database (MySQL %s), which stores all of your site\'s content, is running a supported version. You\'re all set.', 'community-kit' ), $db_version ),
 			);
 		}
 
@@ -218,7 +218,7 @@ class CK_Scanner {
 			'label'   => __( 'Database Version', 'community-kit' ),
 			'status'  => 'warn',
 			/* translators: %s: MySQL version */
-			'message' => sprintf( __( 'MySQL 5.7 or higher is recommended. You are running %s.', 'community-kit' ), $db_version ),
+			'message' => sprintf( __( 'Your database software (MySQL %s) is outdated. The database is where all of your site\'s content is stored. Contact your hosting provider and ask them to upgrade MySQL to version 5.7 or higher.', 'community-kit' ), $db_version ),
 		);
 	}
 
@@ -235,7 +235,7 @@ class CK_Scanner {
 				'label'   => __( 'cURL Extension', 'community-kit' ),
 				'status'  => 'pass',
 				/* translators: %s: cURL version */
-				'message' => sprintf( __( 'cURL %s is available.', 'community-kit' ), $version['version'] ),
+				'message' => sprintf( __( 'Your server can connect to external services (using cURL %s). This is needed for things like sending emails and syncing data. You\'re all set.', 'community-kit' ), $version['version'] ),
 			);
 		}
 
@@ -243,7 +243,7 @@ class CK_Scanner {
 			'id'      => 'curl',
 			'label'   => __( 'cURL Extension', 'community-kit' ),
 			'status'  => 'fail',
-			'message' => __( 'The cURL PHP extension is required but not enabled.', 'community-kit' ),
+			'message' => __( 'Your server is missing a component (called cURL) needed to connect to external services like email and payment providers. Contact your hosting provider and ask them to enable the PHP cURL extension.', 'community-kit' ),
 		);
 	}
 
@@ -258,7 +258,7 @@ class CK_Scanner {
 				'id'      => 'ssl',
 				'label'   => __( 'SSL / HTTPS', 'community-kit' ),
 				'status'  => 'pass',
-				'message' => __( 'Site is served over HTTPS.', 'community-kit' ),
+				'message' => __( 'Your site has a secure connection (the lock icon visitors see in their browser). This keeps your members\' information safe. You\'re all set.', 'community-kit' ),
 			);
 		}
 
@@ -266,7 +266,7 @@ class CK_Scanner {
 			'id'      => 'ssl',
 			'label'   => __( 'SSL / HTTPS', 'community-kit' ),
 			'status'  => 'warn',
-			'message' => __( 'HTTPS is recommended for production sites.', 'community-kit' ),
+			'message' => __( 'Your site does not have a secure connection. Without it, visitors won\'t see a lock icon in their browser, and their information could be at risk. Contact your hosting provider and ask them to enable an SSL certificate — many hosts offer this for free.', 'community-kit' ),
 		);
 	}
 }
