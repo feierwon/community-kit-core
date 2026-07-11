@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Community Kit
  * Description: A modular WordPress framework for nonprofits and community organizations.
- * Version:     0.1.0
+ * Version:     0.1.1
  * Requires at least: 6.3
  * Requires PHP: 8.1
  * Author:      Feierwon Media
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @var string
  */
-define( 'CK_VERSION', '0.1.0' );
+define( 'CK_VERSION', '0.1.1' );
 
 /**
  * Plugin directory path (with trailing slash).
@@ -89,14 +89,20 @@ register_deactivation_hook( __FILE__, 'community_kit_deactivate' );
 */
 
 /**
- * Initialise the plugin on plugins_loaded so extensions can hook in.
+ * Initialise the plugin on init (priority 1) so extensions can hook in.
+ *
+ * Priority 1 matters twice over: translations must not load before init
+ * (WP 6.7 _load_textdomain_just_in_time notice — extensions translate
+ * strings inside their `community_kit_loaded` callbacks), and those same
+ * callbacks add their own `init` actions at default priority, which are
+ * skipped if the running priority has already passed them.
  *
  * @return void
  */
 function community_kit_init(): void {
 	CK_Core::get_instance()->init();
 }
-add_action( 'plugins_loaded', 'community_kit_init' );
+add_action( 'init', 'community_kit_init', 1 );
 
 /*
 |--------------------------------------------------------------------------

@@ -48,7 +48,7 @@ class CK_Core {
 	/**
 	 * Initialise the plugin.
 	 *
-	 * Called on `plugins_loaded`. Registers hooks and boots sub-systems.
+	 * Called on `init` at priority 1. Registers hooks and boots sub-systems.
 	 *
 	 * @return void
 	 */
